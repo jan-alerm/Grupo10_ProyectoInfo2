@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -65,15 +65,21 @@ namespace SimulatorConsole
 
                 // Ejecutar un bucle
                 int i = 0;
-                Console.WriteLine("Escribe el número de ciclos: ");
-                string line = Console.ReadLine();
-                int ciclos = Convert.ToInt32(line);
 
-                int tiempoCiclos = 10;
+                int tiempoCiclos = 5;
                 double distanciaSeguridad = 10;
 
                 while(i < ciclos)
                 {
+                    if (i == 3)
+                    {
+                        bool res = plan_a.Restart();
+                        if (res)
+                        {
+                            Console.WriteLine("Se ha reiniciado la posición del vuelo {0}", plan_a.GetID());
+                        }
+                    }
+                    
                     lista.Mover(tiempoCiclos);
                     lista.EscribeConsola();
 
