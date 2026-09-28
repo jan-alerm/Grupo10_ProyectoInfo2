@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,22 +14,31 @@ namespace FlightLib
         string id; // identificador
         Position currentPosition; // posicion actual
         Position finalPosition; // posicion final
+        Position initialPosition; //Posición inicial
         double velocidad;
 
         // Constructures
         public FlightPlan(string id, double cpx, double cpy, double fpx, double fpy, double velocidad)
         {
             this.id = id;
-            this.currentPosition = new Position(cpx, cpy);
+            this.initialPosition = new Position(cpx, cpy);
+            this.currentPosition = this.initialPosition;
             this.finalPosition = new Position(fpx, fpy);
             this.velocidad = velocidad;
         }
+
+        
 
         // Metodos
 
         public void SetVelocidad(double velocidad)
         // setter del atributo velocidad
         { this.velocidad = velocidad; }
+
+        public string GetID()
+        {
+            return this.id;
+        }
 
 
 
@@ -78,6 +88,20 @@ namespace FlightLib
             return res;
         }
 
+        public bool Restart() // Si no ha habido error, reinicia la posición del vuelo
+        {
+            try
+            {
+                this.currentPosition = this.initialPosition;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
+        
         public void EscribeConsola()
         // escribe en consola los datos del plan de vuelo
         {
