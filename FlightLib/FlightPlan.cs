@@ -102,6 +102,23 @@ namespace FlightLib
 
         }
         
+        public double Distance(FlightPlan plan) //Devuelve la distancia de este plan de vuelo al plan proporcionado como parámetro
+        {
+            try
+            {
+                double X = this.currentPosition.GetX() - plan.currentPosition.GetX();
+                double Y = this.currentPosition.GetY() - plan.currentPosition.GetY();
+
+                double distance = Math.Sqrt(X * X + Y * Y);
+
+                return distance;
+            }
+            catch
+            {
+                return 0.0;
+            }
+        }
+
         public void EscribeConsola()
         // escribe en consola los datos del plan de vuelo
         {
